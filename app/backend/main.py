@@ -10,6 +10,10 @@ def get_transaction():
 def get_category():
     return {"Category"}
 
+@app.get("/month")
+def get_month():
+    return {"month"}
+
 @app.post("/save")
 def save_transaction():
     return None
