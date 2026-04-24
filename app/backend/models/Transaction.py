@@ -1,23 +1,13 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+from database import Base
 
 # transactionテーブル
-class transaction(BaseModel):
-    ID: int
-    CategoryID: int
-    Amount: int
-    Memo: str
+class Transaction(Base):
+    __tablename__ = "transactions"
+    id = Column(Integer, primary_key=True,index=True)
+    category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
+    amount = Column(Integer,nullable=False)
+    memo = Column(String, nullable= True)
 
-# リクエストモデル
-class request(BaseModel):
-    CategoryID: int
-    Amount: int
-    Memo: str
-
-#レスポンス
-class response(BaseModel):
-    ID: int
-    CategoryID: int
-    Amount: int
-    Memo: int
-    
+    categories = relationship("Category", back_populates="transactions")

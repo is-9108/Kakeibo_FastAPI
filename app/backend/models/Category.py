@@ -1,17 +1,13 @@
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.orm import relationship
+from database import Base
 
 #カテゴリテーブル
-class category(BaseModel):
-    ID: int
-    Name: str
-    IsIncome: bool
+class Category(Base):
+    __tablename__ = "categories"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    is_income = Column(Boolean, nullable=False)
 
-#リクエスト
-class request(BaseModel):
-    ID: int
+    transactions = relationship("Transaction", back_populates="categories")
 
-#レスポンス
-class response(BaseModel):
-    ID: int
-    Name: str
-    IsIncome: bool

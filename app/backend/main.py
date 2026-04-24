@@ -1,31 +1,17 @@
 from fastapi import FastAPI
+from database import engine, Base
+from router import Category, Month, Transaction
+
+#テーブル作成
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+#ルーター登録
+app.include_router(Category.router)
+app.include_router(Month.router)
+app.include_router(Transaction.router)
+
 @app.get("/")
-def get_transaction():
-    return {"Transaction"}
-
-@app.get("/category")
-def get_category():
-    return {"Category"}
-
-@app.get("/month")
-def get_month():
-    return {"month"}
-
-@app.post("/save")
-def save_transaction():
-    return None
-
-@app.post("/month")
-def saveMonth():
-    return None
-
-@app.put("/change")
-def change_transaction():
-    return {"transaction"}
-
-@app.delete("/delete")
-def delete_transaction():
-    return None
+def root():
+    return {"message": "家計簿API"}

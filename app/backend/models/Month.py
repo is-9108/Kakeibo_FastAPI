@@ -1,17 +1,19 @@
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer
+from database import Base
 
 #monthテーブル
-class month(BaseModel):
-    ID: int
-    Kyuryo: int
-    SonotaShunyu: int
-    Shokuhi: int
-    Gaishoku: int
-    Hitiyohin: int
-    Koutsuhi: int
-    Yatin: int
-    Sabusuku: int
-    Kounetsuhi: int
-    Fuku: int
-    Shoseki: int
-    Sonota: int
+class month(Base):
+    __tablename__ = "month"
+    id = Column(Integer,primary_key=True,index=True)
+    kyuryo = Column(Integer,nullable=False)
+    sonotaShunyu = Column(Integer,nullable=False)
+    shokuhi = Column(Integer,nullable=False)
+    gaishoku = Column(Integer,nullable=False)
+    hitiyohin = Column(Integer,nullable=False)
+    koutsuhi = Column(Integer,nullable=False)
+    yatin = Column(Integer,nullable=False)
+    sabusuku = Column(Integer,nullable=False)
+    kounetsuhi = Column(Integer,nullable=False)
+    fuku = Column(Integer,nullable=False)
+    shoseki = Column(Integer,nullable=False)
+    sonota = Column(Integer,nullable=False)
